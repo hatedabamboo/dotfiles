@@ -1,0 +1,10 @@
+startup_message off
+shelltitle "NEXUS "
+screen -t bash            0 /bin/bash
+caption always "%?%{ Wk}%-Lw%?%{Kw}%n*%f %t%?(%u)%?%?%{Wk}%+Lw%? %{Rk}%=%c %{rk}%d/%M/%Y"
+hardstatus string "%{+b Rk}(%{-b g}$LOGNAME@%H%{+b R}) (%{-b g}%C %a%{+b R}) %{-b g} %n %t %h"
+windowlist string "%3n %h%=%f"
+term screen-256color
+bind ',' prev
+bind '.' next
+defscrollback 22000
