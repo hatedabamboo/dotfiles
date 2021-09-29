@@ -1,4 +1,5 @@
 startup_message off
+shell /bin/bash
 shelltitle "NEXUS "
 screen -t bash            0 /bin/bash
 caption always "%?%{ Wk}%-Lw%?%{Kw}%n*%f %t%?(%u)%?%?%{Wk}%+Lw%? %{Rk}%=%c %{rk}%d/%M/%Y"
