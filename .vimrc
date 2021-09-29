@@ -5,8 +5,12 @@ set cursorline
 set showmatch
 set hlsearch
 set autoindent
+set autoread
+set ignorecase
+set smartcase
+set encoding=utf8
 
-colo tender
+colo desert
 
 syntax enable
 

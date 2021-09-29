@@ -1,8 +1,3 @@
-case $- in
-    *i*) ;;
-      *) return;;
-esac
-
 HISTCONTROL=ignoreboth
 
 shopt -s histappend
@@ -13,42 +8,35 @@ HISTTIMEFORMAT='%F %T '
 
 shopt -s checkwinsize
 
-if [ -z "${debian_chroot:-}" ] && [ -r /etc/debian_chroot ]; then
-    debian_chroot=$(cat /etc/debian_chroot)
-fi
-
 case "$TERM" in
-    xterm-color|*-256color) color_prompt=yes;;
+  xterm-color|*-256color) color_prompt=yes;;
 esac
 
 force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
-    if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	color_prompt=yes
-    else
-	color_prompt=
-    fi
+  if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
+	  color_prompt=yes
+  else
+	  color_prompt=
+  fi
 fi
 
+function git_branch() {
+  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1]/'
+}
+
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}[\t] \[\033[00;96m\]\u@\h:\w\[\033[00m\]\$ '
+  PS1="[\t] \[\033[00;96m\]\u@RAGE500:\w \$(git_branch)\[\033[00m\]\$ "
 else
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
+  PS1="[\t] \u@RAGE500:\w \$(git_branch)\$ "
 fi
 unset color_prompt force_color_prompt
 
-case "$TERM" in
-xterm*|rxvt*)
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    ;;
-*)
-    ;;
-esac
 
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+  test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+  alias ls='ls --color=auto'
 fi
 
 if [ -f ~/.bash_aliases ]; then
