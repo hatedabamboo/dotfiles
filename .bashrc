@@ -4,9 +4,9 @@ shopt -s checkwinsize
 
 # PARAMETERS
 HISTSIZE=10000
-HISTFILESIZE=20000
+HISTFILESIZE=100000
 HISTTIMEFORMAT='%F %T '
-HISTCONTROL=ignoreboth
+HISTCONTROL=ignoredups
 
 # FUNCTIONS
 function git_branch() {
