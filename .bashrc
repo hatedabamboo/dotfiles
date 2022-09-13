@@ -30,6 +30,10 @@ function prompt_cmd() {
     fi
 }
 
+if [ -f ~/.bash_custom_functions ]; then
+  . ~/.bash_custom_functions
+fi
+
 # PROMPT
 PROMPT_COMMAND=prompt_cmd
 
