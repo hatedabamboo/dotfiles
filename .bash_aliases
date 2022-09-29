@@ -17,3 +17,6 @@ alias gd="git diff"
 
 # TERRAFORM
 alias tf="terraform"
+alias tfi="terraform init"
+alias tfv="terraform validate"
+alias tfcli="terraform console"
