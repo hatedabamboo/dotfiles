@@ -1,0 +1,8 @@
+# CUSTOM SHELL FUNCTIONS
+function init-ssh() {
+  pkill ssh-agent
+  eval $(ssh-agent -s)
+  for key in $(find ${HOME}/.ssh/ -type f -name 'id_rsa*' ! -name '*pub' -perm 400); do
+    ssh-add $key
+  done
+}

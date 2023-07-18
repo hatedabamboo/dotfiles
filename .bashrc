@@ -9,6 +9,10 @@ HISTTIMEFORMAT='%F %T '
 HISTCONTROL=ignoredups
 
 # FUNCTIONS
+if [ -f ~/.bash_custom_functions ]; then
+  . ~/.bash_custom_functions
+fi
+
 function git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1] /'
 }
@@ -29,10 +33,6 @@ function prompt_cmd() {
         PS1+="${GRN}\$${CLR} "
     fi
 }
-
-if [ -f ~/.bash_custom_functions ]; then
-  . ~/.bash_custom_functions
-fi
 
 # PROMPT
 PROMPT_COMMAND=prompt_cmd

@@ -12,10 +12,13 @@ alias fp="fping"
 # ANSIBLE
 alias an="ansible"
 alias anp="ansible-playbook"
+alias anve="ansible-vault encrypt"
+alias anvd="ansible-vault decrypt"
 
 # GIT
 alias gp="git pull"
 alias ga="git add"
+alias gc="git commit -m"
 alias gs="git status"
 alias gd="git diff"
 alias gf="git fetch"
