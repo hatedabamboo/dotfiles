@@ -39,3 +39,6 @@ alias di="docker image"
 alias dr="docker run -d -i"
 alias drm="docker rm"
 alias drm="docker rmi"
+
+# AWS
+alias stsid="aws sts get-caller-identity"
