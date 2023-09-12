@@ -27,7 +27,16 @@ alias gf="git fetch"
 alias tf="terraform"
 alias tfi="terraform init"
 alias tfv="terraform validate"
+alias tff="terraform fmt --recursive"
 alias tfcli="terraform console"
+
+# TERRAGRUNT
+alias tg="terragrunt"
+alias tgp="terragrunt plan --lock=false"
+alias tgrap="terragrunt run-all plan --terragrunt-include-external-dependencies --lock=false"
+alias tga="terragrunt apply"
+alias tgraa="terragrunt run-all apply --terragrunt-include-external-dependencies"
+alias tgf="terragrunt hclfmt ."
 
 # DOCKER
 alias d="docker"
