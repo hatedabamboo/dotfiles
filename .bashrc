@@ -43,7 +43,8 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # FUCK MACOS
-PATH+=":/opt/homebrew/bin"
+export BASH_SILENCE_DEPRECATION_WARNING=1
+PATH+=":/usr/local/bin/:/opt/homebrew/bin"
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
