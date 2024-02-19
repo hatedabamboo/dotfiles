@@ -6,3 +6,13 @@ function init-ssh() {
     ssh-add $key
   done
 }
+
+function new-branch() {
+  echo "$(whoami)-$(openssl rand -hex 8)"
+}
+
+function cert-dates() {
+  website=$1
+  openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -dates
+}
+

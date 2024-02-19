@@ -21,7 +21,7 @@ alias ga="git add"
 alias gc="git commit -m "'"'"\$(git status --short | sed 's/^M /Updated\t/g; s/^A /Added\t/g; s/^D /Deleted\t/g; s/^R /Renamed\t/g ;s/"'"'"//g' | sort)"'"'""
 alias gs="git status"
 alias gd="git diff"
-alias gf="git fetch"
+alias gf="git fetch origin"
 
 # TERRAFORM
 alias tf="terraform"
