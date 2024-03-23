@@ -9,6 +9,7 @@ set autoread
 set ignorecase
 set smartcase
 set encoding=utf8
+set showmatch
 
 colo desert
 
