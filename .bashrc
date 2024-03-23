@@ -7,6 +7,9 @@ HISTSIZE=10000
 HISTFILESIZE=100000
 HISTTIMEFORMAT='%F %T '
 HISTCONTROL=ignoredups
+PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
+EDITOR="/usr/bin/vim"
+source ~/.envvars
 
 # FUNCTIONS
 if [ -f ~/.bash_custom_functions ]; then
@@ -43,8 +46,15 @@ if [ -f ~/.bash_aliases ]; then
 fi
 
 # FUCK MACOS
-export BASH_SILENCE_DEPRECATION_WARNING=1
-PATH+=":/usr/local/bin/:/opt/homebrew/bin"
+if [[ $(uname -s) = "Darwin" ]]; then
+  export BASH_SILENCE_DEPRECATION_WARNING=1
+  PATH+=":/usr/local/bin/:/opt/homebrew/bin"
+fi
+
+# AUTOCOMPLETION
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
+
+# PIP
+PATH+=":$HOME/.local/bin"

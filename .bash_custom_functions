@@ -16,3 +16,18 @@ function cert-dates() {
   openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -dates
 }
 
+function paste() {
+  local filename=$1
+  local text="$(cat $1)"
+  local api_key="$PASTEBIN_API_KEY"
+  local paste_url="https://pastebin.com/api/api_post.php"
+  local expire="1D"
+
+  curl -X POST \
+    -F "api_dev_key=${api_key}" \
+    -F "api_paste_code=<$1" \
+    -F 'api_option=paste' \
+    -F "api_paste_expire_date=${expire}" \
+    ${paste_url}
+  echo
+}
