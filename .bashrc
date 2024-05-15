@@ -9,7 +9,9 @@ HISTTIMEFORMAT='%F %T '
 HISTCONTROL=ignoredups
 PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 EDITOR="/usr/bin/vim"
-source ~/.envvars
+if [ -f ~/.envvars ]; then
+  source ~/.envvars
+fi
 
 # FUNCTIONS
 if [ -f ~/.bash_custom_functions ]; then
@@ -48,7 +50,7 @@ fi
 # FUCK MACOS
 if [[ $(uname -s) = "Darwin" ]]; then
   export BASH_SILENCE_DEPRECATION_WARNING=1
-  PATH+=":/usr/local/bin/:/opt/homebrew/bin"
+  PATH+=":/bin:/usr/local/bin:/opt/homebrew/bin"
 fi
 
 # AUTOCOMPLETION

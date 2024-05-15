@@ -22,6 +22,7 @@ alias gc="git commit -m "'"'"\$(git status --short | sed 's/^M /Updated\t/g; s/^
 alias gs="git status"
 alias gd="git diff"
 alias gf="git fetch origin"
+alias gpu="git push origin \$(git branch --show-current)"
 
 # TERRAFORM
 alias tf="terraform"
