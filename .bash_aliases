@@ -8,6 +8,8 @@ alias p6="ping6"
 alias pssh="parallel-ssh"
 alias pscp="parallel-scp"
 alias fp="fping"
+alias v="vim"
+alias vd="vimdiff"
 
 # ANSIBLE
 alias an="ansible"
@@ -30,6 +32,7 @@ alias tfi="terraform init"
 alias tfv="terraform validate"
 alias tff="terraform fmt --recursive"
 alias tfcli="terraform console"
+alias tfp="terraform plan"
 
 # TERRAGRUNT
 alias tg="terragrunt"
@@ -52,4 +55,3 @@ alias drm="docker rmi"
 
 # AWS
 alias stsid="aws sts get-caller-identity"
-

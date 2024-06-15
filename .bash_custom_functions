@@ -31,3 +31,7 @@ function paste() {
     ${paste_url}
   echo
 }
+
+function ipinfo() {
+  curl https://ipinfo.io 2>/dev/null | jq "{ip: .ip, city: .city, region: .region, country: .country, timezone: .timezone}"
+}
