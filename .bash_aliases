@@ -12,8 +12,8 @@ alias v="vim"
 alias vd="vimdiff"
 
 # ANSIBLE
-alias an="ansible"
-alias anp="ansible-playbook"
+alias an="ansible $ANSIBLE_ARGS"
+alias anp="ansible-playbook $ANSIBLE_ARGS"
 alias anve="ansible-vault encrypt"
 alias anvd="ansible-vault decrypt"
 
