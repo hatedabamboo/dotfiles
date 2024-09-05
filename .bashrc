@@ -4,11 +4,12 @@ shopt -s checkwinsize
 
 # PARAMETERS
 HISTSIZE=10000
-HISTFILESIZE=100000
+HISTFILESIZE=1000000
 HISTTIMEFORMAT='%F %T '
 HISTCONTROL=ignoredups
 PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 EDITOR="/usr/bin/vim"
+
 if [ -f ~/.envvars ]; then
   source ~/.envvars
 fi
@@ -18,13 +19,13 @@ if [ -f ~/.bash_custom_functions ]; then
   . ~/.bash_custom_functions
 fi
 
-function git_branch() {
+git_branch() {
   git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1] /'
 }
 
-function prompt_cmd() {
+prompt_cmd() {
   local EXIT="$?"
-  PS1=""
+  PS1="$(history -a)"
   local CLR='\[\e[0m\]'
   local RED='\[\e[0;31m\]'
   local GRN='\[\e[0;32m\]'
@@ -60,3 +61,6 @@ fi
 
 # PIP
 PATH+=":$HOME/.local/bin"
+
+# GO
+GOPATH="$HOME/go"

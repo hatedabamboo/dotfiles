@@ -1,5 +1,5 @@
 # CUSTOM SHELL FUNCTIONS
-function init-ssh() {
+init-ssh() {
   pkill ssh-agent
   eval $(ssh-agent -s)
   for key in $(find ${HOME}/.ssh/ -type f -name 'id_rsa*' ! -name '*pub' -perm 400); do
@@ -7,16 +7,21 @@ function init-ssh() {
   done
 }
 
-function new-branch() {
+new-branch() {
   echo "$(whoami)-$(openssl rand -hex 8)"
 }
 
-function cert-dates() {
+cert-dates() {
   website=$1
   openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -dates
 }
 
-function paste() {
+get-cert() {
+  website=$1
+  openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -text
+}
+
+paste() {
   local filename=$1
   local text="$(cat $1)"
   local api_key="$PASTEBIN_API_KEY"
@@ -32,6 +37,6 @@ function paste() {
   echo
 }
 
-function ipinfo() {
+ipinfo() {
   curl https://ipinfo.io 2>/dev/null | jq "{ip: .ip, city: .city, region: .region, country: .country, timezone: .timezone}"
 }
