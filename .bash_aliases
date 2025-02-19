@@ -13,6 +13,7 @@ alias vd="vimdiff"
 alias sops="sops -k $SOPS_KMS_ARN"
 alias wgu="wg-quick up wg0"
 alias wgd="wg-quick down wg0"
+alias py="/usr/bin/python3"
 
 # ANSIBLE
 alias an="ansible $ANSIBLE_ARGS"
@@ -28,6 +29,8 @@ alias gs="git status"
 alias gd="git diff"
 alias gf="git fetch origin"
 alias gpu="git push origin \$(git branch --show-current)"
+alias gce="git commit -m 'Empty commit' --allow-empty"
+# alias gcm="[[ \"$(git branch --list 'master' | wc -l)\" -eq \"1\" ]] && git checkout master || git checkout main"
 
 # TERRAFORM
 alias tf="terraform"
@@ -51,8 +54,8 @@ alias dp="docker ps"
 alias dpa="docker ps -a"
 alias dl="docker logs"
 alias din="docker inspect"
-alias di="docker image"
-alias dr="docker run -d -i"
+alias di="docker images"
+alias dr="docker run -di"
 alias drm="docker rm"
 alias drm="docker rmi"
 

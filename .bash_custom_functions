@@ -12,12 +12,12 @@ new-branch() {
 }
 
 cert-dates() {
-  website=$1
+  website="$1"
   openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -dates
 }
 
 get-cert() {
-  website=$1
+  website="$1"
   openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -text
 }
 
@@ -39,4 +39,27 @@ paste() {
 
 ipinfo() {
   curl https://ipinfo.io 2>/dev/null | jq "{ip: .ip, city: .city, region: .region, country: .country, timezone: .timezone}"
+}
+
+fromts() {
+  local ts="$1"
+  local len="$(echo -n $ts | wc -c)"
+
+  if [ "$len" -eq "13" ]; then
+    date -d@"$(echo $(($ts/1000)))"
+  elif [ "$len" -eq "10" ]; then
+    date -d@"$ts"
+  else
+    echo "Wrong timestamp"
+  fi
+}
+
+ots() {
+  local secret=$1
+  local ttl=3600
+  local user="$OTS_USER_NAME"
+  local api_key="$OTS_API_KEY"
+  local domain="https://eu.onetimesecret.com"
+
+  echo -n "Your new secret is: $domain/secret/"; curl -X POST -u "$user:$api_key" -d "secret=$secret&ttl=$ttl" "$domain/api/v1/share" 2>/dev/null | jq -r .secret_key
 }

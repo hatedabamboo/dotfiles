@@ -6,7 +6,7 @@ shopt -s checkwinsize
 HISTSIZE=10000
 HISTFILESIZE=1000000
 HISTTIMEFORMAT='%F %T '
-HISTCONTROL=ignoredups
+HISTCONTROL=ignoredups:erasedups
 PATH="/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin"
 EDITOR="/usr/bin/vim"
 
@@ -25,13 +25,12 @@ git_branch() {
 
 prompt_cmd() {
   local EXIT="$?"
-  PS1="$(history -a)"
   local CLR='\[\e[0m\]'
   local RED='\[\e[0;31m\]'
   local GRN='\[\e[0;32m\]'
   local YEL='\[\e[0;93m\]'
 
-  PS1+="[\t] ${YEL}\w \$(git_branch)${CLR}"
+  PS1="[\t] ${YEL}\w \$(git_branch)${CLR}"
 
   if [ $EXIT != 0 ]; then
     PS1+="${RED}\$${CLR} "
@@ -41,7 +40,7 @@ prompt_cmd() {
 }
 
 # PROMPT
-PROMPT_COMMAND=prompt_cmd
+PROMPT_COMMAND="history -a; history -c; history -r; prompt_cmd"
 
 # ALIASES
 if [ -f ~/.bash_aliases ]; then
