@@ -1,0 +1,60 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "notification_panel": {
+    "dock": "right"
+  },
+  "active_pane_modifiers": {
+    "border_size": 1.0
+  },
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false
+  },
+  "buffer_font_size": 15,
+  "buffer_font_family": "Source Code Pro",
+  "buffer_font_weight": 500,
+  "ui_font_size": 15,
+  "ui_font_family": "Source Code Pro",
+  "ui_font_weight": 400,
+  "theme": {
+    "mode": "system",
+    "light": "Github Light",
+    "dark": "One Dark"
+  },
+  "restore_on_startup": "last_session",
+  "scrollbar": {
+    "show": "always",
+    "diagnostics": "warning"
+  },
+  "tab_bar": {
+    "show_nav_history_buttons": false,
+    "show_tab_bar_buttons": false
+  },
+  "tabs": {
+    "file_icons": true,
+    "show_close_button": "hover"
+  },
+  "toolbar": {
+    "quick_actions": true,
+    "selections_menu": false,
+    "agent_review": false,
+    "code_actions": false
+  },
+  "show_whitespaces": "selection",
+  "project_panel": {
+    "entry_spacing": "standard",
+    "indent_size": 15,
+    "hide_root": true
+  },
+  "agent": {
+    "version": "2",
+    "enabled": false
+  }
+}

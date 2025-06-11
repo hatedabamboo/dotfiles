@@ -8,7 +8,7 @@ init-ssh() {
 }
 
 new-branch() {
-  echo "$(whoami)-$(openssl rand -hex 8)"
+  echo "$(whoami)-tmp-$(openssl rand -hex 8)"
 }
 
 cert-dates() {
@@ -61,5 +61,7 @@ ots() {
   local api_key="$OTS_API_KEY"
   local domain="https://eu.onetimesecret.com"
 
-  echo -n "Your new secret is: $domain/secret/"; curl -X POST -u "$user:$api_key" -d "secret=$secret&ttl=$ttl" "$domain/api/v1/share" 2>/dev/null | jq -r .secret_key
+  secret=$(curl -X POST -u "$user:$api_key" -d "secret=$secret&ttl=$ttl" "$domain/api/v1/share" 2>/dev/null | jq -r .secret_key)
+  echo "$domain/secret/$secret"
 }
+

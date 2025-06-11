@@ -24,7 +24,7 @@ alias anvd="ansible-vault decrypt"
 # GIT
 alias gp="git pull"
 alias ga="git add"
-alias gc="git commit -m "'"'"\$(git status --short | sed 's/^M /Updated\t/g; s/^A /Added\t/g; s/^D /Deleted\t/g; s/^R /Renamed\t/g; s/^?? /WIP\t/g; s/"'"'"//g' | sort)"'"'""
+alias gc="git commit -m "'"'"\$(git status --short | sed 's/^M /Updated\t/g; s/^ M /Updated\t/g; s/^A /Added\t/g; s/^D /Deleted\t/g; s/^R /Renamed\t/g; s/^?? /WIP\t/g; s/"'"'"//g' | sort)"'"'""
 alias gs="git status"
 alias gd="git diff"
 alias gf="git fetch origin"
@@ -58,6 +58,7 @@ alias di="docker images"
 alias dr="docker run -di"
 alias drm="docker rm"
 alias drm="docker rmi"
+alias dcom="docker compose"
 
 # AWS
 alias stsid="aws sts get-caller-identity"
