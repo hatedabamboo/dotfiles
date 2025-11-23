@@ -69,4 +69,9 @@ PATH+=":$HOME/.local/bin"
 GOPATH="$HOME/go/bin"
 
 # add Pulumi to the PATH
-export PATH=$PATH:/home/hatedabamboo/.pulumi/bin
+export PATH="$PATH:$HOME/.pulumi/bin"
+
+if [ -d "$HOME/.exe"  ]; then
+  export PATH+=":$HOME/.exe"
+fi
+

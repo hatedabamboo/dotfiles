@@ -1,0 +1,44 @@
+#!/bin/bash
+set -euo pipefail
+
+gen_rand_mac() {
+  while :; do
+    mac=$(openssl rand -hex 6 | sed 's/\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)/\1:\2:\3:\4:\5:\6/')
+    first_byte_hex=${mac%%:*}
+    first_byte=$((0x$first_byte_hex))
+    if (( (first_byte & 1) == 0 )); then
+      echo "$mac"
+      return
+    fi
+  done
+}
+
+if [[ "$(id -u)" != "0" ]]; then
+  echo "This script must be run as root, exiting..."
+  exit 1
+fi
+
+WL_DEVICE=$(ip link show | awk '/^([0-9]+): wl/{print $2}' | tr -d ':')
+WL_MAC=$(ip link show "$WL_DEVICE" | awk '/link\/ether/ {print $2}')
+RAND_MAC=$(gen_rand_mac)
+
+if [[ -z "$WL_DEVICE" ]]; then
+  echo "Unable to find a wireless device, exiting..."
+  exit 1
+fi
+
+echo "Found wireless device: $WL_DEVICE"
+echo "Current $WL_DEVICE MAC address: $WL_MAC"
+
+echo "Disabling $WL_DEVICE"
+ip link set dev "$WL_DEVICE" down
+
+echo "Setting new MAC address $RAND_MAC"
+ip link set dev "$WL_DEVICE" address "$RAND_MAC"
+
+echo "Bringing $WL_DEVICE back up"
+ip link set dev "$WL_DEVICE" up
+
+echo "Wireless back up, new MAC: $(ip link show "$WL_DEVICE" | awk '/link\/ether/ {print $2}')"
+
+exit 0
