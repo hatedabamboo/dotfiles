@@ -21,7 +21,7 @@ get-cert() {
   openssl s_client -connect $website:443 </dev/null 2>/dev/null | openssl x509 -noout -text
 }
 
-paste() {
+pastebin() {
   local filename=$1
   local text="$(cat $1)"
   local api_key="$PASTEBIN_API_KEY"
@@ -65,3 +65,53 @@ ots() {
   echo "$domain/secret/$secret"
 }
 
+
+is-online() {
+  local url="http://cp.cloudflare.com/generate_204"
+  local timeout=${1:-1}
+  local response=$(
+    curl \
+    --output /dev/null \
+    --write-out "%{http_code}" \
+    --max-time "$timeout" \
+    --silent \
+    "$url"
+  )
+
+  if [ "$response" = "200" ] || [ "$response" = "204" ]; then
+    echo "Yep"
+  else
+    echo "Nope" && return 1
+  fi
+}
+
+uncommit() {
+  git reset --soft HEAD^
+}
+
+mkcd() {
+  mkdir -p "$1"
+  cd "$1"
+}
+
+uppered() {
+  tr '[:lower:]' '[:upper:]'
+}
+
+lowered() {
+  tr '[:upper:]' '[:lower:]'
+}
+
+timer() {
+  (nohup sleep "$1" &>/dev/null && notify-send -u normal -w -a "Timer" "Timer complete: $1" &)
+}
+
+cpfn() {
+  local filename="$1"
+
+  realpath "$filename" | tr -d '\n' | wl-copy 
+}
+
+newmac() {
+  openssl rand -hex 6 | sed 's/\(..\)\(..\)\(..\)\(..\)\(..\)\(..\)/\1:\2:\3:\4:\5:\6/'
+}

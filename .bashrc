@@ -24,7 +24,7 @@ git_branch() {
 }
 
 prompt_cmd() {
-  local EXIT="$?"
+  local EXIT=$?
   local CLR='\[\e[0m\]'
   local RED='\[\e[0;31m\]'
   local GRN='\[\e[0;32m\]'
@@ -40,7 +40,7 @@ prompt_cmd() {
 }
 
 # PROMPT
-PROMPT_COMMAND="history -a; history -c; history -r; prompt_cmd"
+PROMPT_COMMAND="prompt_cmd; history -a; history -c; history -r"
 
 # ALIASES
 if [ -f ~/.bash_aliases ]; then
@@ -58,8 +58,15 @@ if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
 fi
 
+if [ -f ~/.k9s-completion.bash ]; then
+  . ~/.k9s-completion.bash
+fi
+
 # PIP
 PATH+=":$HOME/.local/bin"
 
 # GO
-GOPATH="$HOME/go"
+GOPATH="$HOME/go/bin"
+
+# add Pulumi to the PATH
+export PATH=$PATH:/home/hatedabamboo/.pulumi/bin

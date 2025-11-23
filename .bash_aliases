@@ -11,9 +11,14 @@ alias fp="fping"
 alias v="vim"
 alias vd="vimdiff"
 alias sops="sops -k $SOPS_KMS_ARN"
-alias wgu="wg-quick up wg0"
-alias wgd="wg-quick down wg0"
+# alias wgu="wg-quick up wg0"
+# alias wgd="wg-quick down wg0"
 alias py="/usr/bin/python3"
+alias nv="nvim"
+alias bd="base64 -d"
+alias copy="wl-copy"
+alias paste="wl-paste -n"
+alias cpwd="pwd | tr -d '\n' | wl-copy"
 
 # ANSIBLE
 alias an="ansible $ANSIBLE_ARGS"
@@ -30,7 +35,8 @@ alias gd="git diff"
 alias gf="git fetch origin"
 alias gpu="git push origin \$(git branch --show-current)"
 alias gce="git commit -m 'Empty commit' --allow-empty"
-# alias gcm="[[ \"$(git branch --list 'master' | wc -l)\" -eq \"1\" ]] && git checkout master || git checkout main"
+alias gcm="git checkout main"
+alias gmo="git merge origin main"
 
 # TERRAFORM
 alias tf="terraform"
@@ -59,6 +65,9 @@ alias dr="docker run -di"
 alias drm="docker rm"
 alias drm="docker rmi"
 alias dcom="docker compose"
+
+# K8S
+alias k="kubectl"
 
 # AWS
 alias stsid="aws sts get-caller-identity"
