@@ -1,0 +1,53 @@
+#!/bin/bash
+
+set -euo pipefail
+
+_die() {
+  echo "$@"
+  exit 1
+}
+
+_check_exec() {
+  local execf=$1
+
+  if [ -z "$execf" ]; then
+    _die "No executable filename provided, exiting"
+  fi
+
+  if ! command -v "$execf" &>/dev/null; then
+    _die "No $execf executable found, exiting"
+  fi
+}
+
+if [ "$#" -ne "1" ]; then
+  _die "The script requires 1 parameter: <cluster name>"
+fi
+
+_check_exec aws
+_check_exec kubectl
+
+CLUSTERNAME="$1"
+REGION="us-west-2"
+KUBEDIR="$HOME/.kube"
+CURCONFIG="$KUBEDIR/config"
+
+if [ ! -d "$KUBEDIR" ]; then
+  mkdir -p "$KUBEDIR"
+fi
+
+aws \
+  --region "$REGION" \
+  eks update-kubeconfig \
+  --name "$CLUSTERNAME" \
+  --kubeconfig "$KUBEDIR/$CLUSTERNAME.config" \
+  &>/dev/null
+
+if [ -f "$CURCONFIG" ]; then
+  mv "$CURCONFIG" "$CURCONFIG.bk"
+fi
+
+ln -s "$KUBEDIR/$CLUSTERNAME.config" "$CURCONFIG"
+
+echo "Fetched config file for $CLUSTERNAME and put it into ~/.kube/config"
+
+exit 0
