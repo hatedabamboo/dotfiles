@@ -68,6 +68,7 @@ alias dcom="docker compose"
 
 # K8S
 alias k="kubectl"
+alias kns="kubectl config set-context --current --namespace"
 
 # AWS
 alias stsid="aws sts get-caller-identity"

@@ -7,8 +7,23 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "notification_panel": {
-    "dock": "right"
+  "disable_ai": true,
+  "edit_predictions": {
+    "mode": "subtle",
+    "copilot": {
+      "proxy": null,
+      "proxy_no_verify": null
+    },
+    "enabled_in_text_threads": false
+  },
+  "minimap": {
+    "show": "auto",
+    "thumb": "hover",
+    "thumb_border": "none"
+  },
+  "show_edit_predictions": false,
+  "features": {
+    "edit_prediction_provider": null
   },
   "active_pane_modifiers": {
     "border_size": 1.0
@@ -18,18 +33,18 @@
     "diagnostics": false
   },
   "buffer_font_size": 15,
-  "buffer_font_family": "Source Code Pro",
-  "buffer_font_weight": 500,
-  "ui_font_size": 15,
-  "ui_font_family": "Source Code Pro",
+  "buffer_font_family": "Liberation Mono",
+  "buffer_font_weight": 400,
+  "ui_font_size": 17,
+  // "ui_font_family": "Liberation Mono",
   "ui_font_weight": 400,
-  "theme": {
-    "mode": "system",
-    "light": "Github Light",
-    "dark": "One Dark"
+  "theme": "VSCode Light",
+  "git": {
+    "git_gutter": "tracked_files"
   },
   "restore_on_startup": "last_session",
   "scrollbar": {
+    "git_diff": true,
     "show": "always",
     "diagnostics": "warning"
   },
@@ -54,7 +69,7 @@
     "hide_root": true
   },
   "agent": {
-    "version": "2",
     "enabled": false
-  }
+  },
+  "formatter": "language_server"
 }

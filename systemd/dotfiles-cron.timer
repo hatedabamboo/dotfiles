@@ -1,0 +1,11 @@
+[Unit]
+Description=Weekly dotfiles reminder
+Requires=dotfiles-cron.service
+
+[Timer]
+Unit=dotfiles-cron.service                                                                                                                                                                                                               
+OnCalendar=Mon *-*-* 10:00:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target
