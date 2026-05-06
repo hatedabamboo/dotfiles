@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TYPES="feat|fix|docs|style|refactor|perf|test|chore|ci|build|revert"
+
+usage() {
+    cat >&2 <<EOF
+Usage: ${0##*/} "type(scope)?: message"
+
+Types: feat, fix, docs, style, refactor, perf, test, chore, ci, build, revert
+EOF
+}
+
+if [[ $# -eq 0 ]]; then
+    usage
+    exit 0
+fi
+
+MSG="$1"
+
+if ! echo "$MSG" | grep -qE "^($TYPES)(\([^)]+\))?!?: .+"; then
+    echo "Error: message doesn't follow conventional commits format" >&2
+    echo "       got: $MSG" >&2
+    echo
+    usage
+    cat >&2 <<EOF
+Examples:
+  gcm "feat: add multi-tag selection"
+  gcm "fix(auth): restore useTag shortcut"
+  gcm "chore!: drop support for Go 1.20"
+EOF
+    exit 1
+fi
+
+git commit -m "$MSG"

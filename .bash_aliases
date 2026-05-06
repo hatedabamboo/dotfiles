@@ -19,6 +19,7 @@ alias bd="base64 -d"
 alias copy="wl-copy"
 alias paste="wl-paste -n"
 alias cpwd="pwd | tr -d '\n' | wl-copy"
+alias wifi="nmcli d wifi"
 
 # ANSIBLE
 alias an="ansible $ANSIBLE_ARGS"

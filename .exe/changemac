@@ -19,8 +19,11 @@ if [[ "$(id -u)" != "0" ]]; then
   exit 1
 fi
 
-WL_DEVICE=$(ip link show | awk '/^([0-9]+): wl/{print $2}' | tr -d ':')
-WL_MAC=$(ip link show "$WL_DEVICE" | awk '/link\/ether/ {print $2}')
+WL_DEVICE=$1
+if [ -z $WL_DEVICE ]; then
+  WL_DEVICE=$(ip link show | awk '/^([0-9]+): wl/{print $2}' | tr -d ':')
+fi
+WL_MAC=$(ip link show "$WL_DEVICE" | awk '/link/ {print $2}')
 RAND_MAC=$(gen_rand_mac)
 
 if [[ -z "$WL_DEVICE" ]]; then
@@ -40,6 +43,6 @@ ip link set dev "$WL_DEVICE" address "$RAND_MAC"
 echo "Bringing $WL_DEVICE back up"
 ip link set dev "$WL_DEVICE" up
 
-echo "Wireless back up, new MAC: $(ip link show "$WL_DEVICE" | awk '/link\/ether/ {print $2}')"
+echo "Wireless back up, new MAC: $(ip link show "$WL_DEVICE" | awk '/link/ {print $2}')"
 
 exit 0

@@ -7,7 +7,34 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
-  "disable_ai": true,
+  "cli_default_open_behavior": "existing_window",
+  "agent_servers": {
+    "claude-acp": {
+      "type": "registry"
+    }
+  },
+  "when_closing_with_no_tabs": "platform_default",
+  "git_panel": {
+    "dock": "left",
+    "default_width": 240.0
+  },
+  "outline_panel": {
+    "dock": "left",
+    "default_width": 240.0
+  },
+  "resize_all_panels_in_dock": [
+    "left"
+  ],
+  "notification_panel": {
+    "default_width": 240.0,
+    "button": false
+  },
+  "collaboration_panel": {
+    "dock": "left",
+    "button": false,
+    "default_width": 240
+  },
+  "disable_ai": false,
   "edit_predictions": {
     "mode": "subtle",
     "copilot": {
@@ -22,9 +49,6 @@
     "thumb_border": "none"
   },
   "show_edit_predictions": false,
-  "features": {
-    "edit_prediction_provider": null
-  },
   "active_pane_modifiers": {
     "border_size": 1.0
   },
@@ -38,7 +62,7 @@
   "ui_font_size": 17,
   // "ui_font_family": "Liberation Mono",
   "ui_font_weight": 400,
-  "theme": "VSCode Light",
+  "theme": "GitHub Light Tritanopia",
   "git": {
     "git_gutter": "tracked_files"
   },
@@ -64,12 +88,16 @@
   },
   "show_whitespaces": "selection",
   "project_panel": {
+    "dock": "left",
+    "default_width": 240.0,
     "entry_spacing": "standard",
     "indent_size": 15,
     "hide_root": true
   },
   "agent": {
-    "enabled": false
+    "sidebar_side": "right",
+    "dock": "right",
+    "enabled": true
   },
   "formatter": "language_server"
 }
