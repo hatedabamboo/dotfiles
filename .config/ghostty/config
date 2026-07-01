@@ -1,0 +1,4 @@
+font-family       = "Cantarell Regular"
+window-height     = 55
+window-width      = 239
+initial-command   = "/usr/bin/tmux"

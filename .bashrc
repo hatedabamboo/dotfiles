@@ -20,7 +20,8 @@ if [ -f ~/.bash_custom_functions ]; then
 fi
 
 git_branch() {
-  git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1] /'
+  git rev-parse --is-inside-work-tree &>/dev/null || return
+  git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/[\1] /'
 }
 
 prompt_cmd() {
@@ -56,10 +57,6 @@ fi
 # AUTOCOMPLETION
 if [ -f ~/.git-completion.bash ]; then
   . ~/.git-completion.bash
-fi
-
-if [ -f ~/.k9s-completion.bash ]; then
-  . ~/.k9s-completion.bash
 fi
 
 # PIP

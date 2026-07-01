@@ -144,3 +144,11 @@ whosip() {
   ["Flags",      "\(b(.is_vpn;"vpn")) \(b(.is_tor;"tor")) \(b(.is_proxy;"proxy")) \(b(.is_datacenter;"dc"))"]
   ) | "\(.[0])\t\(.[1])"' | column -t -s $'\t'
 }
+
+cdmktmp() {
+  suffix="$(openssl rand -base64 10 | tr -d '/=+')"
+  tmpdir="tmp-$suffix"
+
+  mkdir -p "$HOME/$tmpdir"
+  cd "$tmpdir"
+}

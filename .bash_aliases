@@ -20,6 +20,7 @@ alias copy="wl-copy"
 alias paste="wl-paste -n"
 alias cpwd="pwd | tr -d '\n' | wl-copy"
 alias wifi="nmcli d wifi"
+alias ocode="~/.local/bin/opencode"
 
 # ANSIBLE
 alias an="ansible $ANSIBLE_ARGS"
@@ -38,6 +39,7 @@ alias gpu="git push origin \$(git branch --show-current)"
 alias gce="git commit -m 'Empty commit' --allow-empty"
 alias gcm="git checkout main"
 alias gmo="git merge origin main"
+alias gmob="git merge origin $(git branch --show-current 2>/dev/null)"
 
 # TERRAFORM
 alias tf="terraform"
