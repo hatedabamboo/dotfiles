@@ -1,7 +1,0 @@
-[Unit]
-Description=Reminder to commit dotfiles to repository
-Wants=dotfiles-cron.timer
-
-[Service]
-Type=oneshot
-ExecStart=/home/hatedabamboo/repo/dotfiles/cron.sh

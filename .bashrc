@@ -51,7 +51,20 @@ fi
 # FUCK MACOS
 if [[ $(uname -s) = "Darwin" ]]; then
   export BASH_SILENCE_DEPRECATION_WARNING=1
+  export HOMEBREW_NO_ENV_HINTS=1
+  export GPG_TTY=$(tty)
   PATH+=":/bin:/usr/local/bin:/opt/homebrew/bin"
+
+  if command -v brew &>/dev/null; then
+    if [ -d /opt/homebrew/Cellar/bash-completion ]; then
+      if [ -d /opt/homebrew/etc/bash_completion.d/ ]; then
+        source /opt/homebrew/etc/bash_completion
+        for program in brew gh helm k9s kubectl; do
+          source "/opt/homebrew/etc/bash_completion.d/$program"
+        done
+      fi
+    fi
+  fi
 fi
 
 # AUTOCOMPLETION
