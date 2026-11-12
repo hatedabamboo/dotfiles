@@ -13,12 +13,12 @@ alias vd="vimdiff"
 alias sops="sops -k $SOPS_KMS_ARN"
 # alias wgu="wg-quick up wg0"
 # alias wgd="wg-quick down wg0"
-alias py="/usr/bin/python3"
+alias py="/usr/bin/env python3"
 alias nv="nvim"
 alias bd="base64 -d"
-alias copy="wl-copy"
-alias paste="wl-paste -n"
-alias cpwd="pwd | tr -d '\n' | wl-copy"
+if [ "$(uname -s)" == "Darwin" ]; then alias copy="pbcopy"; else alias copy="wl-copy"; fi
+if [ "$(uname -s)" == "Darwin" ]; then alias paste="pbpaste"; else alias paste="wl-paste -n"; fi
+if [ "$(uname -s)" == "Darwin" ]; then alias cpwd="pwd | tr -d '\n' | pbcopy"; else alias cpwd="pwd | tr -d '\n' | wl-copy"; fi
 alias wifi="nmcli d wifi"
 alias ocode="~/.local/bin/opencode"
 
@@ -72,6 +72,12 @@ alias dcom="docker compose"
 # K8S
 alias k="kubectl"
 alias kns="kubectl config set-context --current --namespace"
+alias k0s="k9s"
+alias k8s="k9s"
 
 # AWS
 alias stsid="aws sts get-caller-identity"
+
+# TSH
+alias tl="tsh login"
+alias tkl="tsh kube login"

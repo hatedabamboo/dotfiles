@@ -45,12 +45,22 @@ fromts() {
   local ts="$1"
   local len="$(echo -n $ts | wc -c)"
 
-  if [ "$len" -eq "13" ]; then
-    date -d@"$(echo $(($ts/1000)))"
-  elif [ "$len" -eq "10" ]; then
-    date -d@"$ts"
-  else
-    echo "Wrong timestamp"
+  if [[ $(uname -s) = "Darwin" ]]; then 
+    if [ "$len" -eq "13" ]; then
+      date -r "$(echo $(($ts/1000)))"
+    elif [ "$len" -eq "10" ]; then
+      date -r "$ts"
+    else
+      echo "Wrong timestamp"
+    fi
+	else
+    if [ "$len" -eq "13" ]; then
+      date -d@"$(echo $(($ts/1000)))"
+    elif [ "$len" -eq "10" ]; then
+      date -d@"$ts"
+    else
+      echo "Wrong timestamp"
+    fi
   fi
 }
 
@@ -68,7 +78,7 @@ ots() {
 
 is-online() {
   local url="http://cp.cloudflare.com/generate_204"
-  local timeout=${1:-1}
+  local timeout=${2:-1}
   local response=$(
     curl \
     --output /dev/null \
@@ -108,8 +118,12 @@ timer() {
 
 cpfn() {
   local filename="$1"
-
-  realpath "$filename" | tr -d '\n' | wl-copy 
+  
+  if [ "$(uname -s)" == "Darwin" ]; then
+    realpath "$filename" | tr -d '\n' | pbcopy
+  else
+    realpath "$filename" | tr -d '\n' | wl-copy
+  fi
 }
 
 newmac() {
@@ -146,9 +160,25 @@ whosip() {
 }
 
 cdmktmp() {
-  suffix="$(openssl rand -base64 10 | tr -d '/=+')"
-  tmpdir="tmp-$suffix"
-
-  mkdir -p "$HOME/$tmpdir"
+  local suffix="$(openssl rand -base64 10 | tr -d '/=+')"
+  local tmpname="tmp-$suffix"
+  local tmpdir="$(pwd)/$tmpname"
+  
+  mkdir -p "$tmpdir"
   cd "$tmpdir"
+}
+
+git-init() {
+  if [ ! -d ".git" ]; then
+    echo "Not a git repo, exiting"
+    exit 1
+  fi
+
+  if [ -z "$GIT_SSH_KEY" ]; then
+    echo "GIT_SSH_KEY is empty, set the variable"
+    exit 1
+  fi
+  
+  git config pull.rebase false
+  git config set core.sshCommand "ssh -i $GIT_SSH_KEY"
 }

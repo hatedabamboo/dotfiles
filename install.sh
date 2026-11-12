@@ -10,7 +10,11 @@ for file in $(find . -maxdepth 1 -type f -name '.*'); do
   cp ${file} ~/
 done
 
-cp -ra .exe/ ~/
+if [ "$(uname -s)" == "Darwin" ]; then
+  cp -a .exe/ ~/
+else
+  cp -ra .exe/ ~/
+fi
 
 echo -e "Now run:\nsource ~/.bashrc"
 
